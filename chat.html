@@ -43,7 +43,6 @@
 
         .item-list { display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto; margin-bottom: 8px; background: var(--bg-base); padding: 6px; border-radius: 6px; border: 1px solid var(--border-color); }
         .list-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 6px 10px; border-radius: 4px; font-size: 0.82rem; }
-        .item-actions { display: flex; gap: 4px; }
 
         .mini-btn { border: none; padding: 3px 7px; border-radius: 4px; cursor: pointer; font-size: 0.72rem; font-weight: 600; color: #fff; }
         .mini-btn-green { background: var(--accent-green); }
@@ -63,7 +62,6 @@
         .sys-banner-close { background: none; border: none; color: #fff; cursor: pointer; font-size: 1rem; }
 
         .chat-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
-        .scroll-down-btn { position: absolute; bottom: 80px; right: 20px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--accent-glow); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 10; }
 
         .msg-card { display: flex; gap: 12px; background: var(--bg-surface); padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border-color); max-width: 85%; width: fit-content; word-break: break-word; position: relative; user-select: none; }
         .msg-card.mentioned { border-color: var(--accent-gold); background: rgba(245, 158, 11, 0.08); }
@@ -83,31 +81,18 @@
         .msg-username { font-weight: 700; font-size: 0.9rem; color: var(--accent-glow); cursor: pointer; }
         .msg-text { font-size: 0.95rem; color: var(--text-main); line-height: 1.4; }
         .mention-tag { background: rgba(56, 189, 248, 0.2); color: var(--accent-glow); padding: 1px 4px; border-radius: 3px; font-weight: 600; }
-        .msg-edited-tag { font-size: 0.7rem; color: var(--text-muted); font-style: italic; }
-
-        .voice-player { display: flex; align-items: center; gap: 8px; margin-top: 4px; background: var(--bg-base); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border-color); }
-        .voice-player audio { height: 32px; max-width: 200px; }
 
         /* INPUT AREA & INDICATORS */
         .chat-input-wrapper { background: var(--bg-surface); border-top: 1px solid var(--border-color); display: flex; flex-direction: column; position: relative; }
         .active-reply-bar { background: var(--bg-card); padding: 6px 12px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--text-muted); }
         .cooldown-bar { background: rgba(239, 68, 68, 0.15); border-bottom: 1px solid var(--danger); color: var(--danger); padding: 4px 12px; font-size: 0.78rem; font-weight: 600; text-align: center; }
 
-        /* TYPING & AI INDICATORS */
         .status-indicator-bar { background: var(--bg-card); padding: 6px 12px; border-bottom: 1px solid var(--accent-glow); font-size: 0.82rem; font-weight: 600; text-align: center; font-style: italic; color: var(--accent-glow); }
         .ai-pulse-anim { animation: aiPulse 1.2s infinite alternate; }
         @keyframes aiPulse { 0% { opacity: 0.5; } 100% { opacity: 1; text-shadow: 0 0 8px var(--accent-glow); } }
 
         .chat-input-area { padding: 0.8rem 1rem; display: flex; gap: 8px; align-items: center; }
         .chat-input-area input { flex: 1; }
-
-        .mic-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--accent-glow); width: 42px; height: 42px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-        .mic-btn.recording { background: var(--danger); color: #fff; animation: pulse 1s infinite alternate; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 200; }
-        .modal-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem; width: 90%; max-width: 320px; display: flex; flex-direction: column; gap: 10px; }
-        .modal-btn { padding: 10px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; text-align: center; background: var(--bg-card); color: var(--text-main); }
-        .modal-btn-danger { background: var(--danger); color: #fff; }
 
         .drawer-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 40; display: none; }
         @media (max-width: 768px) {
@@ -125,7 +110,6 @@
             <div class="drawer-profile">
                 <img id="drawer-my-avatar" class="drawer-avatar" src="" alt="Avatar">
                 <div id="drawer-my-name" class="drawer-username"></div>
-                <button class="mini-btn mini-btn-gold" id="change-username-btn">Change Username</button>
             </div>
 
             <div class="drawer-content">
@@ -146,51 +130,7 @@
                     <div class="section-title">Set Badge Color (Dev/Owner)</div>
                     <div style="display:flex; gap:6px;">
                         <input type="color" id="badge-color-picker" value="#38bdf8" style="width:45px; height:38px; padding:2px;">
-                        <button class="btn" id="save-badge-color-btn">Apply Color</button>
-                    </div>
-                </div>
-
-                <div id="grant-badge-panel" class="hidden">
-                    <div class="section-title">Grant User Badge</div>
-                    <div style="display:flex; flex-direction:column; gap:6px;">
-                        <input type="text" id="grant-target-user" placeholder="Username" style="padding:6px;">
-                        <select id="grant-badge-select" style="padding:6px;">
-                            <option value="[MEMBER]">[MEMBER]</option>
-                            <option value="[GUARD]">[GUARD]</option>
-                            <option value="[DEV]">[DEV]</option>
-                            <option value="[OWNER]">[OWNER]</option>
-                        </select>
-                        <button class="btn" id="grant-badge-btn">Grant Badge</button>
-                    </div>
-                </div>
-
-                <div id="slowmode-panel" class="hidden">
-                    <div class="section-title">Slowmode Config</div>
-                    <div style="display:flex; gap:6px;">
-                        <input type="number" id="slowmode-input" placeholder="Seconds" min="0" max="60" style="padding:6px;">
-                        <button class="btn" id="save-slowmode-btn" style="width:70px;">Save</button>
-                    </div>
-                </div>
-
-                <div id="dev-tools-panel" class="hidden">
-                    <div class="section-title">Dev Admin Panel</div>
-                    <input type="text" id="dev-user-search" placeholder="Search user..." style="padding:4px 8px; margin-bottom:6px;">
-                    <div class="item-list" id="dev-user-list-container"></div>
-                </div>
-
-                <div id="admin-tools-panel" class="hidden">
-                    <div class="section-title">System Announcement</div>
-                    <button class="modal-btn" id="admin-post-banner-btn" style="margin-bottom:10px;">Broadcast</button>
-
-                    <div class="section-title">Muted Panel</div>
-                    <div class="item-list" id="muted-list-container"></div>
-
-                    <div class="section-title">Banned Panel</div>
-                    <div class="item-list" id="ban-list-container"></div>
-
-                    <div style="display:flex; flex-direction:column; gap:6px;">
-                        <button class="modal-btn modal-btn-danger" id="admin-ban-btn">Ban User</button>
-                        <button class="modal-btn modal-btn-danger" id="admin-clear-btn">Purge Messages</button>
+                        <button class="btn" id="save-badge-color-btn">Apply</button>
                     </div>
                 </div>
 
@@ -209,25 +149,19 @@
                 <div style="width:28px;"></div>
             </header>
 
-            <div id="sys-announcement-banner" class="sys-banner hidden">
-                <span id="sys-announcement-text"></span>
-                <button class="sys-banner-close" onclick="document.getElementById('sys-announcement-banner').classList.add('hidden')">✕</button>
-            </div>
-
             <div class="chat-messages" id="message-list"></div>
-            <button class="scroll-down-btn hidden" id="scroll-down-btn">↓</button>
 
             <div class="chat-input-wrapper">
                 <div id="cooldown-timer-bar" class="cooldown-bar hidden">
                     Slowmode enabled: Please wait <span id="cooldown-seconds">3</span>s...
                 </div>
 
-                <!-- NEW: AI THINKING INDICATOR -->
+                <!-- AI THINKING INDICATOR -->
                 <div id="ai-typing-indicator" class="status-indicator-bar ai-pulse-anim hidden">
                     ✨ ShinyPixel AI is thinking...
                 </div>
 
-                <!-- NEW: LIVE USER TYPING INDICATOR -->
+                <!-- LIVE USER TYPING INDICATOR -->
                 <div id="user-typing-indicator" class="status-indicator-bar hidden"></div>
 
                 <div id="reply-active-bar" class="active-reply-bar hidden">
@@ -236,24 +170,11 @@
                 </div>
 
                 <form class="chat-input-area" id="chat-form">
-                    <button type="button" class="mic-btn" id="mic-btn">🎙️</button>
-                    <input type="text" id="chat-input" placeholder="Type a message, /Ip, or @Shiny..." autocomplete="off">
+                    <input type="text" id="chat-input" placeholder="Type a message, /ip, or @shiny..." autocomplete="off">
                     <button type="submit" class="btn" id="chat-send-btn" style="width:80px;">Send</button>
                 </form>
             </div>
         </main>
-    </div>
-
-    <div class="modal-overlay hidden" id="action-modal">
-        <div class="modal-card">
-            <div style="font-weight:bold; text-align:center;" id="modal-title">Message Options</div>
-            <button class="modal-btn" id="modal-reply-btn">Reply</button>
-            <button class="modal-btn" id="modal-edit-btn">Edit</button>
-            <button class="modal-btn modal-btn-danger" id="modal-delete-btn">Delete</button>
-            <button class="modal-btn modal-btn-gold" id="modal-mute-author-btn">Mute Author</button>
-            <button class="modal-btn modal-btn-danger" id="modal-ban-author-btn">Ban Author</button>
-            <button class="modal-btn" id="modal-cancel-btn">Cancel</button>
-        </div>
     </div>
 
     <!-- FIREBASE SDKs -->
@@ -270,16 +191,11 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        const CODES = { DEV: '03072129539', OWNER: '03222133085', GUARD: '090807' };
-        const BAD_WORDS = ['fuck', 'shit', 'bitch', 'asshole', 'chutiya', 'bhenchod', 'gandu', 'kos', 'matkos'];
-
         const messageList = document.getElementById('message-list');
-        const scrollDownBtn = document.getElementById('scroll-down-btn');
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('chat-input');
         const chatSendBtn = document.getElementById('chat-send-btn');
         const logoutBtn = document.getElementById('logout-btn');
-        const micBtn = document.getElementById('mic-btn');
 
         const cooldownTimerBar = document.getElementById('cooldown-timer-bar');
         const cooldownSeconds = document.getElementById('cooldown-seconds');
@@ -290,60 +206,15 @@
         const drawerToggleBtn = document.getElementById('drawer-toggle-btn');
         const drawerOverlay = document.getElementById('drawer-overlay');
         const rankSelect = document.getElementById('rank-select');
-        const changeUsernameBtn = document.getElementById('change-username-btn');
-        const redeemCodeInput = document.getElementById('redeem-code-input');
-        const redeemCodeBtn = document.getElementById('redeem-code-btn');
-        
-        const colorCustomizerPanel = document.getElementById('color-customizer-panel');
-        const badgeColorPicker = document.getElementById('badge-color-picker');
-        const saveBadgeColorBtn = document.getElementById('save-badge-color-btn');
-        const grantBadgePanel = document.getElementById('grant-badge-panel');
-        const grantTargetUser = document.getElementById('grant-target-user');
-        const grantBadgeSelect = document.getElementById('grant-badge-select');
-        const grantBadgeBtn = document.getElementById('grant-badge-btn');
-
-        const slowmodePanel = document.getElementById('slowmode-panel');
-        const slowmodeInput = document.getElementById('slowmode-input');
-        const saveSlowmodeBtn = document.getElementById('save-slowmode-btn');
-
-        const adminToolsPanel = document.getElementById('admin-tools-panel');
-        const devToolsPanel = document.getElementById('dev-tools-panel');
-        const devUserListContainer = document.getElementById('dev-user-list-container');
-        const devUserSearch = document.getElementById('dev-user-search');
-        const banListContainer = document.getElementById('ban-list-container');
-        const mutedListContainer = document.getElementById('muted-list-container');
-        const adminClearBtn = document.getElementById('admin-clear-btn');
-        const adminBanBtn = document.getElementById('admin-ban-btn');
-        const adminPostBannerBtn = document.getElementById('admin-post-banner-btn');
-
-        const sysAnnouncementBanner = document.getElementById('sys-announcement-banner');
-        const sysAnnouncementText = document.getElementById('sys-announcement-text');
         const replyActiveBar = document.getElementById('reply-active-bar');
         const replyTargetAuthor = document.getElementById('reply-target-author');
 
-        const actionModal = document.getElementById('action-modal');
-        const modalReplyBtn = document.getElementById('modal-reply-btn');
-        const modalEditBtn = document.getElementById('modal-edit-btn');
-        const modalDeleteBtn = document.getElementById('modal-delete-btn');
-        const modalMuteAuthorBtn = document.getElementById('modal-mute-author-btn');
-        const modalBanAuthorBtn = document.getElementById('modal-ban-author-btn');
-        const modalCancelBtn = document.getElementById('modal-cancel-btn');
-
         let currentUser = null;
-        let localDbCache = { users: {}, messages: [], announcement: "", banned: {}, muted: {}, slowmode: 3, typing: {} };
-        let selectedMessageIndex = null;
-        let selectedMessageAuthor = null;
-        let selectedMessageText = null;
+        let localDbCache = { users: {}, messages: [], banned: {}, muted: {}, slowmode: 3, typing: {} };
         let activeReplyTarget = null;
-        let pressTimer = null;
         let isCooldownActive = false;
         let typingTimeout = null;
 
-        let mediaRecorder = null;
-        let audioChunks = [];
-        let isRecording = false;
-
-        // RECEIVE USER SESSION FROM MAIN PARENT WINDOW
         window.addEventListener('message', (e) => {
             if (e.data && e.data.type === 'INIT_USER') {
                 currentUser = e.data.user;
@@ -356,20 +227,6 @@
         drawerToggleBtn.addEventListener('click', toggleDrawer);
         drawerOverlay.addEventListener('click', toggleDrawer);
 
-        function getUserPowerLevel(username, usersObj = null) {
-            if (username === 'ServerBot' || username === 'ShinyPixel AI' || username === 'ShinyPixel') return 5;
-            let badges = [];
-            if (usersObj && usersObj[username] && usersObj[username].badges) badges = usersObj[username].badges;
-            else if (currentUser && currentUser.username === username) badges = currentUser.unlockedRanks;
-            else if (localDbCache.users && localDbCache.users[username]) badges = localDbCache.users[username].badges || ['[MEMBER]'];
-
-            if (badges.includes('[DEV]')) return 4;
-            if (badges.includes('[OWNER]')) return 3;
-            if (badges.includes('[GUARD]')) return 2;
-            return 1;
-        }
-
-        // REALTIME TYPING & MESSAGES FIREBASE LISTENERS
         function startRealtimeSync() {
             db.ref('/').on('value', (snapshot) => {
                 const data = snapshot.val() || {};
@@ -381,7 +238,6 @@
                 localDbCache = {
                     users: data.users || {},
                     messages: messagesArr,
-                    announcement: data.announcement || "",
                     banned: data.banned || {},
                     muted: data.muted || {},
                     slowmode: typeof data.slowmode !== 'undefined' ? data.slowmode : 3,
@@ -403,7 +259,6 @@
         }
         logoutBtn.addEventListener('click', logoutUser);
 
-        // TYPING INDICATOR REALTIME TRIGGER
         chatInput.addEventListener('input', () => {
             if (!currentUser) return;
             db.ref(`typing/${currentUser.username}`).set(true);
@@ -425,25 +280,6 @@
                 if (r === currentUser.activeTag) opt.selected = true;
                 rankSelect.appendChild(opt);
             });
-
-            const powerLevel = getUserPowerLevel(currentUser.username);
-
-            if (powerLevel >= 3) {
-                colorCustomizerPanel.classList.remove('hidden');
-                grantBadgePanel.classList.remove('hidden');
-                slowmodePanel.classList.remove('hidden');
-            }
-            if (powerLevel === 4) devToolsPanel.classList.remove('hidden');
-            if (powerLevel >= 2) adminToolsPanel.classList.remove('hidden');
-        }
-
-        function filterBadWords(text) {
-            let filtered = text;
-            BAD_WORDS.forEach(word => {
-                const regex = new RegExp(`\\b${word}\\b`, 'gi');
-                filtered = filtered.replace(regex, '****');
-            });
-            return filtered;
         }
 
         chatForm.addEventListener('submit', async (e) => {
@@ -453,18 +289,12 @@
             const text = chatInput.value.trim();
             if (!text) return;
 
-            if (localDbCache.muted && localDbCache.muted[currentUser.username]) {
-                alert('You are muted by a moderator.');
-                return;
-            }
-
             db.ref(`typing/${currentUser.username}`).remove();
 
-            const cleanText = filterBadWords(text);
             const newMessage = {
                 username: currentUser.username,
                 activeTag: currentUser.activeTag,
-                text: cleanText,
+                text: text,
                 timestamp: Date.now(),
                 avatarUrl: currentUser.avatarUrl,
                 badgeColor: currentUser.badgeColor,
@@ -503,25 +333,22 @@
                 });
                 prompt = prompt.trim();
 
-                // SHOW AI THINKING INDICATOR
                 aiTypingIndicator.classList.remove('hidden');
                 fetchAIResponse(prompt || originalText);
             }
 
             await db.ref('messages').set(currentMsgs);
-
-            const slowmodeSecs = localDbCache.slowmode || 0;
-            const powerLevel = getUserPowerLevel(currentUser.username);
-            if (slowmodeSecs > 0 && powerLevel < 3) triggerCooldown(slowmodeSecs);
         }
 
         async function fetchAIResponse(userPrompt) {
             try {
-                const response = await fetch(GEMINI_API_URL, {
+                // FIXED GEMINI AUTHENTICATION QUERY PARAMETER
+                const requestUrl = `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`;
+
+                const response = await fetch(requestUrl, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'x-goog-api-key': GEMINI_API_KEY
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         systemInstruction: {
@@ -557,28 +384,8 @@
             } catch (err) {
                 console.error("AI Error:", err);
             } finally {
-                // HIDE AI INDICATOR
                 aiTypingIndicator.classList.add('hidden');
             }
-        }
-
-        function triggerCooldown(seconds) {
-            isCooldownActive = true;
-            chatSendBtn.disabled = true;
-            cooldownTimerBar.classList.remove('hidden');
-            let timeLeft = seconds;
-            cooldownSeconds.textContent = timeLeft;
-
-            const interval = setInterval(() => {
-                timeLeft--;
-                cooldownSeconds.textContent = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    isCooldownActive = false;
-                    chatSendBtn.disabled = false;
-                    cooldownTimerBar.classList.add('hidden');
-                }
-            }, 1000);
         }
 
         function setReplyTarget(author, text) {
@@ -597,7 +404,6 @@
             const messages = localDbCache.messages || [];
             const typingUsers = Object.keys(localDbCache.typing || {}).filter(u => u !== currentUser?.username);
 
-            // RENDER USER TYPING INDICATOR
             if (typingUsers.length > 0) {
                 userTypingIndicator.textContent = `${typingUsers.join(', ')} ${typingUsers.length === 1 ? 'is' : 'are'} typing...`;
                 userTypingIndicator.classList.remove('hidden');
@@ -608,7 +414,7 @@
             const isAtBottom = messageList.scrollHeight - messageList.scrollTop <= messageList.clientHeight + 100;
             messageList.innerHTML = '';
 
-            messages.forEach((msg, idx) => {
+            messages.forEach((msg) => {
                 const card = document.createElement('div');
                 card.className = 'msg-card';
 
@@ -617,22 +423,12 @@
                 }
 
                 let badgeClass = 'badge-member';
-                let customStyle = '';
-
                 if (msg.activeTag === '[DEV]') badgeClass = 'badge-dev';
                 else if (msg.activeTag === '[OWNER]') badgeClass = 'badge-owner';
                 else if (msg.activeTag === '[GUARD]') badgeClass = 'badge-guard';
                 else if (msg.activeTag === '[BOT]') badgeClass = 'badge-bot';
 
-                if (msg.badgeColor && msg.activeTag !== '[GUARD]' && msg.activeTag !== '[BOT]') {
-                    customStyle = `background:${msg.badgeColor}; color:#fff;`;
-                }
-
-                const words = msg.text.split(' ');
-                const parsedText = words.map(w => w.startsWith('@') && w.length > 1 ? `<span class="mention-tag">${w}</span>` : w).join(' ');
-
                 let replyBlock = msg.replyTo ? `<div class="reply-preview-box"><span class="reply-preview-author">@${msg.replyTo.author}</span>${msg.replyTo.text}</div>` : '';
-                let contentHtml = msg.audioUrl ? `<div class="voice-player"><span>🎙️ Voice Note</span><audio controls src="${msg.audioUrl}"></audio></div>` : `<div class="msg-text">${parsedText}</div>`;
 
                 card.innerHTML = `
                     <img class="msg-avatar" src="${msg.avatarUrl}" alt="Avatar">
@@ -640,10 +436,9 @@
                         ${replyBlock}
                         <div class="msg-meta">
                             <span class="msg-username" onclick="setReplyTarget('${msg.username}', '${msg.text.replace(/'/g, "\\'")}')">${msg.username}</span>
-                            <span class="badge ${badgeClass}" style="${customStyle}">${msg.activeTag}</span>
-                            ${msg.isEdited ? '<span class="msg-edited-tag">(edited)</span>' : ''}
+                            <span class="badge ${badgeClass}">${msg.activeTag}</span>
                         </div>
-                        ${contentHtml}
+                        <div class="msg-text">${msg.text}</div>
                     </div>
                 `;
 
